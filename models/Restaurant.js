@@ -34,11 +34,15 @@ const RestaurantSchema = new mongoose.Schema({
     },
     opentime:{
         type: String,
-        required: [true, 'Please add a Open Time']
+        required: [true, 'Please add a Open Time'],
+        minlength: 5,
+        maxlength: [5, 'Please label time in 24hr system']
     },
     closetime:{
         type: String,
-        required: [true, 'Please add a Close Time']
+        required: [true, 'Please add a Close Time'],
+        minlength: 5,
+        maxlength: [5, 'Please label time in 24hr system']
     }
 
     },{
