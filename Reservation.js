@@ -12,7 +12,7 @@ const ReservationSchema = new mongoose.Schema({
     },
     restaurant: {
         type: mongoose.Schema.ObjectId,
-        ref: 'restaurant',
+        ref: 'Restaurant',
         required: true
     },
     createdAt: {

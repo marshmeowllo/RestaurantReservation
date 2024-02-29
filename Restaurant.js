@@ -49,8 +49,8 @@ const RestaurantSchema = new mongoose.Schema({
 
     //Cascade delete reservation when a Restaurant is deleted
     RestaurantSchema.pre('deleteOne', { document: true, query: false }, async function(next){
-        console.log(`Reservation being removed from Restaurant ${this._id}`);
-        await this.model('Reservation').deleteMany({Restaurant: this._id});
+        console.log(`Reservation being removed from restaurant ${this._id}`);
+        await this.model('Reservation').deleteMany({restaurant: this._id});
         next();
     });
 
@@ -59,7 +59,7 @@ const RestaurantSchema = new mongoose.Schema({
     RestaurantSchema.virtual('reservation', {
         ref: 'Reservation',
         localField: '_id',
-        foreignField: 'Restaurant',
+        foreignField: 'restaurant',
         justOne: false
     });
 
