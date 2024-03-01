@@ -14,12 +14,13 @@ const PaymentSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Please add amount']
     },
-    paymentMethods:{
+    paymentMethods: {
         type: String,
-        enum: ['credit', 'debit', 'banking'],
+        enum: ['credit', 'debit', 'banking', 'cash'],
         default: 'banking',
         required: [true, 'Please add payment methods']
     }
 
-    });
+});
+
 module.exports = mongoose.model('Payment', PaymentSchema);
