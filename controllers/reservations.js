@@ -125,20 +125,31 @@ exports.createReservation = async (req, res, next) => {
 
         console.log(reservationHour + " " + reservationMin);
         // -----------------TEST-----------------
-
-        if (reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) {
-            return res.status(400).json({
-                success: false,
-                msg: 'Cannot make reservation after the restaurant is closed'
-            });
+        if(openHour > closeHour){
+            //openHour = 0;
+            if((reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) && (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin))){
+                return res.status(400).json({
+                    success: false,
+                    msg: 'Cannot make reservation while the restaurant is not operated'
+                })
+            }
+        }else{
+            if (reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) {
+                return res.status(400).json({
+                    success: false,
+                    msg: 'Cannot make reservation after the restaurant is closed'
+                });
+            }
+    
+            if (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin)) {
+                return res.status(400).json({
+                    success: false,
+                    msg: 'Cannot make reservation before the restaurant is opened'
+                });
+            }
         }
 
-        if (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin)) {
-            return res.status(400).json({
-                success: false,
-                msg: 'Cannot make reservation before the restaurant is opened'
-            });
-        }
+
 
         const reservation = await Reservation.create(req.body);
 
@@ -197,16 +208,50 @@ exports.updateReservation = async (req, res, next) => {
             const formattedTime = reservationHour + ":" + reservationMin;
 
             console.log(reservationHour + " " + reservationMin);
-            if (req.body.resvDate !== null) {
+            if (req.body.resvDate) {
                 const reservationHour = req.body.resvDate.getHours();
                 const reservationMin = req.body.resvDate.getMinutes();
-                if (reservationHour > closeHour || (reservationHour == closeHour && reservationMin >= closeMin)) {
+
+                if(openHour > closeHour){
+                    if((reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) && (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin))){
+                        return res.status(400).json({
+                            success: false,
+                            msg: 'Cannot make reservation while the restaurant is not operated'
+                        })
+                    }
+                }else{
+                    if (reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) {
+                        return res.status(400).json({
+                            success: false,
+                            msg: 'Cannot make reservation after the restaurant is closed'
+                    });
+                }
+                    if (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin)) {
+                        return res.status(400).json({
+                            success: false,
+                            msg: 'Cannot make reservation before the restaurant is opened'
+                    });
+                }
+                }
+
+            }
+            
+            if(openHour > closeHour){
+                if((reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) && (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin))){
+                    return res.status(400).json({
+                        success: false,
+                        msg: 'Cannot make reservation while the restaurant is not operated'
+                    })
+                }
+            }else{
+                if (reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) {
                     return res.status(400).json({
                         success: false,
                         msg: 'Cannot make reservation after the restaurant is closed'
                     });
                 }
-                if (reservationHour < openHour || (reservationHour == openHour && reservationMin <= openMin)) {
+    
+                if (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin)) {
                     return res.status(400).json({
                         success: false,
                         msg: 'Cannot make reservation before the restaurant is opened'
@@ -214,19 +259,6 @@ exports.updateReservation = async (req, res, next) => {
                 }
             }
 
-            if (reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) {
-                return res.status(400).json({
-                    success: false,
-                    msg: 'Cannot make reservation after the restaurant is closed'
-                });
-            }
-
-            if (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin)) {
-                return res.status(400).json({
-                    success: false,
-                    msg: 'Cannot make reservation before the restaurant is opened'
-                });
-            }
         }
 
         //Validate date changes
@@ -248,18 +280,28 @@ exports.updateReservation = async (req, res, next) => {
             const reservationHour = timeArray[0].padStart(2, '0'); // "2"
             const reservationMin = timeArray[1].padStart(2, '0'); // "31"
 
-            if (reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) {
-                return res.status(400).json({
-                    success: false,
-                    msg: 'Cannot make reservation after the restaurant is closed'
-                });
+            if(openHour > closeHour){
+                if((reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) && (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin))){
+                    return res.status(400).json({
+                        success: false,
+                        msg: 'Cannot make reservation while the restaurant is not operated'
+                    })
+                }
+            }else{
+                if (reservationHour > closeHour || (reservationHour == closeHour && reservationMin > closeMin)) {
+                    return res.status(400).json({
+                        success: false,
+                        msg: 'Cannot make reservation after the restaurant is closed'
+                    });
+                }
+                if (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin)) {
+                    return res.status(400).json({
+                        success: false,
+                        msg: 'Cannot make reservation before the restaurant is opened'
+                    });
+                }
             }
-            if (reservationHour < openHour || (reservationHour == openHour && reservationMin < openMin)) {
-                return res.status(400).json({
-                    success: false,
-                    msg: 'Cannot make reservation before the restaurant is opened'
-                });
-            }
+
         }
 
         reservation = await Reservation.findByIdAndUpdate(req.params.id, req.body, {
