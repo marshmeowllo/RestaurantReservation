@@ -1,0 +1,23 @@
+@startuml Auth (GET ALL)
+
+header GET ALL Auth Sequence Diagram
+footer Page 1 of 5
+title "Auth (GET ALL)"
+
+participant "Client" as client
+participant "<<javaScript>>\n:server" as server
+participant "<<router>>\n:Auths" as routerAuths
+participant "<<controllers>>\n:Auths" as controllersAuths
+participant "<<model>>\n:Auth" as modelAuths
+database "<<MongoDB>>\n:Auths" as AuthDatabase
+
+client->server ++:req.post('/Auths')
+server->routerAuths ++:app.use('/api/v1/Auths', Auth);
+routerAuths -> controllersAuths ++:getAuths()
+controllersAuths->modelAuths ++: getAuths(req.body)
+modelAuths ->AuthDatabase ++: AuthSchema
+AuthDatabase --> modelAuths --: Auth
+controllersAuths <-- modelAuths --:Auth
+controllersAuths->client --:response
+
+@enduml

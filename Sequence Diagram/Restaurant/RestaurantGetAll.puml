@@ -11,7 +11,7 @@ participant "<<controllers>>\n:restaurants" as controllersRestaurants
 participant "<<model>>\n:restaurant" as modelRestaurants
 database "<<MongoDB>>\n:restaurants" as RestaurantDatabase
 
-client->server ++:req.post('/restaurants')
+client->server ++:req.get('/restaurants')
 server->routerRestaurants ++:app.use('/api/v1/restaurants', restaurant);
 routerRestaurants -> controllersRestaurants ++:getRestaurants()
 controllersRestaurants->modelRestaurants ++: getRestaurants(req.body)

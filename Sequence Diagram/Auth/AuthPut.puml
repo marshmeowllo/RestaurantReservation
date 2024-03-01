@@ -1,0 +1,23 @@
+@startuml Restautants (PUT)
+
+header PUT Auth Sequence Diagram
+footer Page 4 of 5
+title "Auth (PUT)"
+
+participant "Client" as client
+participant "<<JavaScript>>\n:Server" as server
+participant "<<Router>>\n:Auths" as routerAuths
+participant "<<Controllers>>\n:Auths" as controllersAuths
+participant "<<Model>>\n:Auth" as modelAuths
+database "<<MongoDB>>\n:Auths" as AuthDatabase
+
+client->server: req.put('/Auths/:AuthId')
+server->routerAuths: app.use('/api/v1/Auths/:id', Auth);
+routerAuths->controllersAuths: updateAuth()
+controllersAuths->modelAuths: updateAuth(req.body)
+modelAuths->AuthDatabase: AuthSchema
+AuthDatabase-->modelAuths: Auth
+controllersAuths<--modelAuths: Auth
+controllersAuths->client: response
+
+@enduml
