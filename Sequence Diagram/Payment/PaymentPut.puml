@@ -11,10 +11,10 @@ participant "<<Controllers>>\n:Payments" as controllersPayments
 participant "<<Model>>\n:Payment" as modelPayments
 database "<<MongoDB>>\n:Payments" as PaymentDatabase
 
-client->server: req.put('/Payments/:PaymentId')
+client->server: req.put('/Payments/:id')
 server->routerPayments: app.use('/api/v1/Payments/:id', Payment);
 routerPayments->controllersPayments: updatePayment()
-controllersPayments->modelPayments: updatePayment(req.body)
+controllersPayments->modelPayments: findByIdAndUpdate(req.params.id, req.body)
 modelPayments->PaymentDatabase: PaymentSchema
 PaymentDatabase-->modelPayments: Payment
 controllersPayments<--modelPayments: Payment

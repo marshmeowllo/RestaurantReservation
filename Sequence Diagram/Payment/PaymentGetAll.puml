@@ -14,7 +14,7 @@ database "<<MongoDB>>\n:Payments" as PaymentDatabase
 client->server ++:req.post('/Payments')
 server->routerPayments ++:app.use('/api/v1/Payments', Payment);
 routerPayments -> controllersPayments ++:getPayments()
-controllersPayments->modelPayments ++: getPayments(req.body)
+controllersPayments->modelPayments ++: find()
 modelPayments ->PaymentDatabase ++: PaymentSchema
 PaymentDatabase --> modelPayments --: Payment
 controllersPayments <-- modelPayments --:Payment

@@ -11,10 +11,10 @@ participant "<<controllers>>\n:reservations" as controllersReservations
 participant "<<model>>\n:Reservation" as modelReservation
 database "<<MongoDB>>\n:reservations" as ReservationDatabase
 
-client->server ++:req.delete('/reservations/:reservationsId')
+client->server ++:req.delete('/reservations/:id')
 server->routerReservations ++:app.use('/reservations',reservations)
 routerReservations->controllersReservations ++:deleteReservation()
-controllersReservations ->modelReservation ++: deleteReservation(req.body)
+controllersReservations ->modelReservation ++: findByIdAndDelete(req.params.id)
 modelReservation -> ReservationDatabase ++: ReservationSchema
 ReservationDatabase --> modelReservation --: reservation
 controllersReservations <-- modelReservation --:reservation

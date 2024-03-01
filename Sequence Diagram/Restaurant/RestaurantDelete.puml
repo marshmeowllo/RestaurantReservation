@@ -11,10 +11,10 @@ participant "<<controllers>>\n:restaurants" as controllersRestaurants
 participant "<<model>>\n:restaurant" as modelRestaurants
 database "<<MongoDB>>\n:restaurants" as RestaurantDatabase
 
-client->server: req.delete('/restaurants/:restaurantId')
+client->server: req.delete('/restaurants/:id')
 server->routerRestaurants: app.use('/api/v1/restaurants/:id', restaurant);
 routerRestaurants->controllersRestaurants: deleteRestaurant()
-controllersRestaurants->modelRestaurants: deleteRestaurant(req.params.id)
+controllersRestaurants->modelRestaurants: findByIdAndDelete(req.params.id)
 modelRestaurants->RestaurantDatabase: RestaurantSchema
 RestaurantDatabase --> modelRestaurants --: Restaurant
 controllersRestaurants <-- modelRestaurants --:Restaurant

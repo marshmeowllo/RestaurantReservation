@@ -11,10 +11,10 @@ participant "<<Controllers>>\n:Restaurants" as controllersRestaurants
 participant "<<Model>>\n:Restaurant" as modelRestaurants
 database "<<MongoDB>>\n:Restaurants" as RestaurantDatabase
 
-client->server: req.put('/restaurants/:restaurantId')
-server->routerRestaurants: app.use('/api/v1/restaurants/:id', restaurant);
+client->server: req.put('/restaurants/:id')
+server->routerRestaurants: app.use('/api/v1/restaurants', restaurant);
 routerRestaurants->controllersRestaurants: updateRestaurant()
-controllersRestaurants->modelRestaurants: updateRestaurant(req.body)
+controllersRestaurants->modelRestaurants: findByIdAndUpdate(req.params.id, req.body)
 modelRestaurants->RestaurantDatabase: RestaurantSchema
 RestaurantDatabase-->modelRestaurants: Restaurant
 controllersRestaurants<--modelRestaurants: Restaurant

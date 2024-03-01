@@ -14,7 +14,7 @@ database "<<MongoDB>>\n:reservations" as ReservationDatabase
 client->server ++:req.get('/reservations')
 server->routerReservations ++:app.use('/reservations',reservations)
 routerReservations->controllersReservations ++:getReservations()
-controllersReservations ->modelReservation ++: getReservations(req.body)
+controllersReservations ->modelReservation ++: find()
 modelReservation -> ReservationDatabase ++: ReservationSchema
 ReservationDatabase --> modelReservation --: reservations
 controllersReservations <-- modelReservation --:reservations

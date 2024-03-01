@@ -12,11 +12,11 @@ participant "<<controllers>>\n:reservations" as controllersReservations
 participant "<<model>>\n:Reservation" as modelReservation
 database "<<MongoDB>>\n:reservations" as ReservationDatabase
 
-client->server ++:req.POST('/:restaurantId/reservations')
+client->server ++:req.POST('/:id/reservations')
 server->controllersRestaurants ++:app.use('/restaurants',restaurants)
 controllersRestaurants -> routerReservations ++:router.use(reservationRouter)
 routerReservations->controllersReservations ++:createReservation()
-controllersReservations ->modelReservation ++: createReservation(req.body)
+controllersReservations ->modelReservation ++: create(req.body)
 modelReservation -> ReservationDatabase ++: ReservationSchema
 ReservationDatabase --> modelReservation --: reservation
 controllersReservations <-- modelReservation --:reservation

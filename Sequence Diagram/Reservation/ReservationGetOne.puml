@@ -11,10 +11,10 @@ participant "<<controllers>>\n:reservations" as controllersReservations
 participant "<<model>>\n:Reservation" as modelReservation
 database "<<MongoDB>>\n:reservations" as ReservationDatabase
 
-client->server ++:req.get('/reservations/:reservationsId')
-server->routerReservations ++:app.use('/reservations/:id',reservations)
+client->server ++:req.get('/reservations/:id')
+server->routerReservations ++:app.use('/reservations/',reservations)
 routerReservations->controllersReservations ++:getReservation()
-controllersReservations ->modelReservation ++: getReservation(req.body)
+controllersReservations ->modelReservation ++: findById(req.params.id)
 modelReservation -> ReservationDatabase ++: ReservationSchema
 ReservationDatabase --> modelReservation --: reservation
 controllersReservations <-- modelReservation --:reservation

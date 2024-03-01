@@ -11,10 +11,10 @@ participant "<<controllers>>\n:restaurants" as controllersRestaurants
 participant "<<model>>\n:restaurant" as modelRestaurants
 database "<<MongoDB>>\n:restaurants" as RestaurantDatabase
 
-client->server ++:req.get('/restaurants/:restaurantId')
-server->routerRestaurants ++:app.use('/api/v1/restaurants/:id', restaurant);
+client->server ++:req.get('/restaurants/:id')
+server->routerRestaurants ++:app.use('/api/v1/restaurants', restaurant);
 routerRestaurants -> controllersRestaurants ++:getRestaurants()
-controllersRestaurants->modelRestaurants ++:getRestaurant(req.body)
+controllersRestaurants->modelRestaurants ++:findById(req.params.id)
 modelRestaurants ->RestaurantDatabase ++: RestaurantSchema
 RestaurantDatabase --> modelRestaurants --: Restaurant
 controllersRestaurants <-- modelRestaurants --:Restaurant
