@@ -6,13 +6,15 @@ title "Payment (POST)"
 
 participant "Client" as client
 participant "<<javaScript>>\n:server" as server
+participant "<<javaScript>>\n:Reservation" as reservationsRouter
 participant "<<router>>\n:Payments" as routerPayments
 participant "<<controllers>>\n:Payments" as controllersPayments
 participant "<<model>>\n:Payment" as modelPayments
 database "<<MongoDB>>\n:Payments" as PaymentDatabase
 
 client->server ++:req.post('/Payments')
-server->routerPayments ++:app.use('/api/v1/Payments', Payment);
+server->reservationsRouter ++:app.use('/api/v1/reservations', Reservation)
+reservationsRouter -> routerPayments ++:router.use(paymentRouter)
 routerPayments -> controllersPayments ++:createPayment()
 controllersPayments->modelPayments ++:create(req.body)
 modelPayments ->PaymentDatabase ++: PaymentSchema
