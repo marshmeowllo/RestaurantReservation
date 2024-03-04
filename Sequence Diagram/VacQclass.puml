@@ -1,0 +1,121 @@
+@startuml
+package "Restaurant Reservation"{
+    class "<<Application>>\nRestaurant Reservation" as ResResv{}
+
+    class "<<Resource>>\nRestaurant" as ResourceHospitals{
+        <<GET>> +getRestaurant(): Restaurant
+        <<POST>> +createRestaurant(): Restaurant
+    }
+
+    class "<<Resource>>\nRestaurant" as ResourceHospital {
+        <<GET>> +getRestaurant(): Restaurant
+        <<PUT>> +updateRestaurant(): Restaurant
+        <<DELETE>> +deleteRestaurant(): void
+        ReservationRouter
+    }
+
+    class "<<Representation>>\nRestaurant" as RepresentationHospital {
+        -name
+        -address
+        -district
+        -province
+        -postalcode
+        -region
+        -tel
+        -opentime
+        -closetime
+        -map
+    }
+
+    class "<<Resource>>\nReservation" as ResourceReservations {
+        <<GET>> +getReservations(): Reservation
+        <<POST>> +createReservation(): Reservation
+    }
+
+    class "<<Resource>>\nReservation" as ResourceReservation {
+        <<GET>> +getReservation(): Reservation
+        <<PUT>> +updateReservation(): Reservation
+        <<DELETE>> +deleteReservation(): void
+        PaymentRouter
+    }
+
+    class "<<Representation>>\nReservation" as RepresentationReservation {
+        -resvDate
+        -user
+        -restaurant
+        -createdAt
+    }
+
+    class "<<Resource>>\nPayment" as ResourcePayments {
+        <<GET>> +getPayments(): Payment
+        <<POST>> +createPayment(): Payment
+    }
+
+    class "<<Resource>>\nPayment" as ResourcePayment{
+        <<GET>> +getPayment(): Payment
+        <<PUT>> +updatePayment(): Payment
+        <<DELETE>> +deletePayment(): void
+    }
+
+    class "<<Representation>>\nPayment" as RepresentationPayment{
+        -timePayment
+        -reservation
+        -amount
+        -paymentMethods
+    }
+
+    class "<<Resource>>\nAuth" as ResourceAuth{
+
+    }
+
+    class "<<Resource>>\nRegister" as Register {
+        <<POST>> +register(): User
+    }
+    class "<<Resource>>\nLogin" as Login {
+        <<POST>> +login(): User
+    }
+    class "<<Resource>>\nMe" as getMe {
+        <<GET>> +getMe(): User
+    }
+    class "<<Resource>>\nLogout" as Logout {
+        <<GET>> +logout(): User
+    }
+    
+    class "<<Representation>>\nUser" as RepresentationUser {
+        -name
+        -tel
+        -email
+        -role
+        -password
+        -resetPasswordToken
+        -resetPasswordExpire
+        -createdAt
+    }
+}
+
+ResResv ..> ResourceHospitals:"/restaurants\n<<Path>>"
+ResResv ..> ResourcePayments: "/payments\n<<Path>>"
+ResResv ..> ResourceReservations:"/reservations\n<<Path>>"
+ResResv ..> ResourceAuth: "/auth\n<<Path>>"
+
+ResourceHospitals ..> ResourceHospital: "/{hospitalId}\n<<Path>>"
+ResourceHospital ..> RepresentationHospital: "<<use>>"
+
+ResourceHospital ..> ResourceReservations:"/reservations\n<<Path>>"
+ResourceReservations ..> ResourceReservation:"/{reservationId}\n<<Path>>"
+ResourceReservation ..> RepresentationReservation: "<<use>>"
+
+ResourcePayments ..> ResourcePayment: "/{paymentId}\n<<Path>>"
+ResourcePayment ..> RepresentationPayment: "<<use>>"
+ResourceReservation ..> ResourcePayments: "/payments\n<<Path>>"
+
+ResourceAuth ..> Register: "/register\n<<Path>>"
+ResourceAuth ..> Login: "/login\n<<Path>>"
+ResourceAuth ..> getMe: "/me\n<<Path>>"
+ResourceAuth ..> Logout: "/logout\n<<Path>>"
+
+Register ..> RepresentationUser: "<<use>>"
+Login ..> RepresentationUser: "<<use>>"
+getMe ..> RepresentationUser: "<<use>>"
+Logout ..> RepresentationUser: "<<use>>"
+@enduml
