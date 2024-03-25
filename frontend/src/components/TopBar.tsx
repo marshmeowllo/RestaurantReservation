@@ -1,11 +1,6 @@
 'use client'
 
-import { BiMenu } from 'react-icons/bi';
-import Box from './marquee';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import Marquee from './marquee';
-import { usePathname } from "next/navigation";
 
 interface NavBarProps {
     userName: string;
@@ -13,8 +8,6 @@ interface NavBarProps {
 
 export default function TopBar({ userName }: NavBarProps) {
     const truncatedUserName = userName.length > 8 ? userName.slice(0, 5) + '...' : userName;
-
-    let pathname = usePathname() || "/";
 
     return (
         <nav className="max-w-1440 text-base flex flex-row z-30 wh-8 mt-9 ml-9 mr-9 mb-9">
