@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth';
 export default async function SideBar() {
 
     const session = await getServerSession(authOptions)
+    console.log(session)
 
     
     const preLogin = [
@@ -24,7 +25,7 @@ export default async function SideBar() {
             <ul>
                 {
                     session?
-                    preLogin.map(({ href, label }) => {
+                    postLogin.map(({ href, label }) => {
                         return (
                             <li key={href} className="text-4xl border-b-4 border-stone-800 pb-9 mb-18">
                                 <Link href={href}>
@@ -35,7 +36,7 @@ export default async function SideBar() {
                             </li>
                         );
                     }):
-                    postLogin.map(({href,label})=>{
+                    preLogin.map(({href,label})=>{
                         return(
                             <li key={href} className="text-4xl border-b-4 border-stone-800 pb-9 mb-18">
                             <Link href={href}>
