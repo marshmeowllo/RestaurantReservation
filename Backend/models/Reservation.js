@@ -20,5 +20,5 @@ const ReservationSchema = new mongoose.Schema({
         default: Date.now
     }
 
-    });
+});
 module.exports = mongoose.model('Reservation', ReservationSchema);
