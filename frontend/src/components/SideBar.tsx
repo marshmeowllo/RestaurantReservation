@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import getRestaurants from '@/libs/getRestaurants';
+import { RestaurantItem } from '../../interface';
 
 export async function LeftSideBar() {
 
     const session = await getServerSession(authOptions)
+    console.log(session)
 
 
     const preLogin = [
@@ -25,7 +27,7 @@ export async function LeftSideBar() {
             <ul>
                 {
                     session ?
-                        preLogin.map(({ href, label }) => {
+                        postLogin.map(({ href, label }) => {
                             return (
                                 <li key={href} className="text-4xl border-b-4 border-stone-800 pb-9 mb-18">
                                     <Link href={href}>
@@ -36,7 +38,7 @@ export async function LeftSideBar() {
                                 </li>
                             );
                         }) :
-                        postLogin.map(({ href, label }) => {
+                        preLogin.map(({ href, label }) => {
                             return (
                                 <li key={href} className="text-4xl border-b-4 border-stone-800 pb-9 mb-18">
                                     <Link href={href}>
@@ -53,11 +55,11 @@ export async function LeftSideBar() {
     );
 }
 
-export async function RightSideBar() {
+export async function RightSideBar({ RestaurantJson }: { RestaurantJson: Promise<RestaurantItem> }) {
 
     const session = await getServerSession(authOptions)
 
-    const restaurant = getRestaurants();
+    const restaurant: RestaurantItem = await RestaurantJson;
 
     const preLogin = [
         { href: '/', label: 'Home' },
@@ -77,31 +79,7 @@ export async function RightSideBar() {
             <div className='width-[100%]]'>
                 <p className='text-base font-bold'>Ranking</p>
                 <ul>
-                    {
-                        session ?
-                            preLogin.map(({ href, label }) => {
-                                return (
-                                    <li key={href} className="text-4xl border-b-4 border-stone-800 pb-9 mb-18">
-                                        <Link href={href}>
-                                            <p className='text-stone-800'>
-                                                {label}
-                                            </p>
-                                        </Link>
-                                    </li>
-                                );
-                            }) :
-                            postLogin.map(({ href, label }) => {
-                                return (
-                                    <li key={href} className="text-4xl border-b-4 border-stone-800 pb-9 mb-18">
-                                        <Link href={href}>
-                                            <p className='text-stone-800'>
-                                                {label}
-                                            </p>
-                                        </Link>
-                                    </li>
-                                );
-                            })
-                    }
+                    
                 </ul>
             </div>
         </div>

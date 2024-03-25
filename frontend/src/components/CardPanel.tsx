@@ -1,7 +1,6 @@
 'use client'
 import { useReducer, useState } from "react";
 import Card from "./Card";
-import { Link } from "@mui/material";
 import { useRef,useEffect } from "react";
 import getRestaurants from "@/libs/getRestaurants";
 

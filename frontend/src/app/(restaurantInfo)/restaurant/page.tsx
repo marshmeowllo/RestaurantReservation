@@ -7,10 +7,10 @@ import { LinearProgress } from '@mui/material';
 export default function Home() {
   const restaurants = getRestaurants()
   return (
-    <main className='text-center p-5'>
-      <h1 className='text-xl font-medium'>Select Your Hospital</h1>
-      <Suspense fallback={<p>Now Loading...<LinearProgress/></p>}>
-      <RestaurantCatalog RestaurantsJson={restaurants}/>
+    <main className='w-[70%] text-center'>
+      <p className='text-left text-4xl mb-16'>Your Reservation</p>
+      <Suspense fallback={<p>Now Loading...<LinearProgress /></p>}>
+        <RestaurantCatalog RestaurantsJson={restaurants} />
       </Suspense>
     </main>
   );

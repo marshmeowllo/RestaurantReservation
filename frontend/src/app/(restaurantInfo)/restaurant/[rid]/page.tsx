@@ -2,7 +2,7 @@ import Image from "next/image"
 import getRestaurant from "@/libs/getRestaurant"
 import { Link } from "@mui/material";
 
-export default async function RestaurantDetailPage({params}:{params:{rid:string}}) {
+export default async function RestaurantDetailPage({ params }: { params: { rid: string } }) {
 
     const restaurantDetails = await getRestaurant(params.rid)
     return (
@@ -10,15 +10,15 @@ export default async function RestaurantDetailPage({params}:{params:{rid:string}
             <h1 className="text-lg font-medium">{restaurantDetails.data.name}</h1>
             <div className="flex flex-row my-5">
                 <Image src={restaurantDetails.data.picture}
-                alt="Hospital Picture"
-                width={0} height={0} sizes="100vw"
-                className="rounded-lg w-[30%] bg-black"/>
+                    alt="Hospital Picture"
+                    width={0} height={0} sizes="100vw"
+                    className="rounded-lg w-[30%] bg-black" />
                 <div className="text-md mx-5 text-left">{restaurantDetails.data.name}
-                <div>Address: {restaurantDetails.data.address}</div>
-                <div>Province: {restaurantDetails.data.province}</div>
-                <div>District {restaurantDetails.data.district}</div>
-                <div>Zipcode: {restaurantDetails.data.postalcode}</div>
-                <div>Tel: {restaurantDetails.data.tel}</div>
+                    <div>Address: {restaurantDetails.data.address}</div>
+                    <div>Province: {restaurantDetails.data.province}</div>
+                    <div>District {restaurantDetails.data.district}</div>
+                    <div>Zipcode: {restaurantDetails.data.postalcode}</div>
+                    <div>Tel: {restaurantDetails.data.tel}</div>
                 </div>
                 <Link href={`/reserve?id=${params.rid}&name=${restaurantDetails.data.name}`}>
                     <button className="block rounded-md bg-sky-600 hover:bg-indigo px-3 py-1 text-white shadow-sm">

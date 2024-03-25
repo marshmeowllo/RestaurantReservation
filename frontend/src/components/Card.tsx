@@ -1,58 +1,59 @@
 'use client'
+
 import styles from '@/components/card.module.css'
 import Image from 'next/image';
 import InteractiveCard from './InteractiveCard';
-import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import * as React from 'react';
 
-export default function Card({hospitalName, imgSrc, onChangeRating}:{hospitalName:string, imgSrc?:string, onChangeRating?:(newValue: number | null, hospitalName: string) => void}) {
-    const [value, setValue] = React.useState<number | null>(5);
-
-    const handleRatingChange = (event: React.ChangeEvent<{}>, newValue: number | null) => {
-        if (newValue !== null) {
-            setValue(newValue);
-            onChangeRating && onChangeRating(newValue, hospitalName);
-        }
-    };
-    const handleReset=() =>{
-        setValue(null);
-    }
-
-
+export default function Card({ restaurantName, imgSrc, address, tel, time }:
+    { restaurantName: string, imgSrc: string, address: string, tel: string, time: string }) {
     return (
         <InteractiveCard>
-            <div className={styles.card}>
-                <div className={styles.cardimg}>
-                   {
-                    imgSrc?
-                    <Image src={imgSrc}
-                        alt='Hospital Picture'
-                        width={250} // Set the width of the image
-                        height={250} // Set the height of the image
-                        layout='responsive'
-                    />: null
-                    }
+            <div className='flex flex-col'>
+                <div className="w-[298px] h-[496px]">
+                    <div className="p-2">
+                        {
+                            <Image src={imgSrc}
+                                alt='Hospital Picture'
+                                width={284} // Set the width of the image
+                                height={181} // Set the height of the image
+                                className='bg-cover w-[284px] h-[181px]'
+                            />
+                        }
+                    </div>
+                    <div className="p-2 flex flex-col">
+                        <p className='text-2xl text-left mb-4'>
+                            {restaurantName}
+                        </p>
+                        <div className="flex-row flex justify-between items-center mb-4">
+                            <p className='text-xs text-green-700 font-bold'>
+                                OPENED
+                            </p>
+                            <p className='text-xs'>
+                                {time}
+                            </p>
+                        </div>
+                        <p className='text-base text-left mb-4'>
+                            Address
+                        </p>
+                        <p className='text-xs text-left pb-4'>
+                            {address}
+                        </p>
+                    </div>
+                    <div className='flex flex-row m-2'>
+                        <button className='w-[141px] h-[37px] border border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
+                        hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
+                        hover:-translate-x-1 hover:-translate-y-1' onClick={(e) => { e.stopPropagation; }}>
+                            Details
+                        </button>
+                        <button className='w-[141px] h-[37px] border border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
+                        hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
+                        hover:-translate-x-1 hover:-translate-y-1' onClick={(e) => { e.stopPropagation; }}>
+                            Reserve 
+                        </button>
+                    </div>
                 </div>
-                <div className={styles.cardText}>{hospitalName}</div>
-            
-            {onChangeRating &&(<Box
-                sx={{
-                    '& > legend': { mt: 2 },
-                }}
-            >
-                <Typography component="legend">Rating</Typography>
-                <Rating
-                    data-testid={hospitalName + " Rating"}
-                    id={hospitalName + " Rating"}
-                    name={hospitalName+" Rating"}
-                    value={value}
-                    onChange={handleRatingChange}
-                />
-            </Box>
-            )}
-        </div>
+            </div>
         </InteractiveCard>
     );
 }
