@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import TopBar from "@/components/TopBar";
-import SideBar from "@/components/SideBar";
+import {LeftSideBar, RightSideBar} from "@/components/SideBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <TopBar userName="sam" />
-        <div className="flex flex-row">
-          <SideBar />
+        <div className="flex flex-row width-[100%]">
+          <LeftSideBar />
           {children}
-          <SideBar />
+          <RightSideBar />
         </div>
       </body>
     </html>
