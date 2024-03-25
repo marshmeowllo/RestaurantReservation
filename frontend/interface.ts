@@ -23,7 +23,7 @@ export interface RestaurantItem {
     createdAt: string;
   }
 
-  export interface reserveJson {
+  export interface RestaurantJson {
     success: boolean,
     count: number,
     pagination: Object,
