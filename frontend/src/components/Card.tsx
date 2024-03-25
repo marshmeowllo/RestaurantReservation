@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import * as React from 'react';
 
-export default function Card({hospitalName, imgSrc, onChangeRating}:{hospitalName:string, imgSrc:string, onChangeRating?:(newValue: number | null, hospitalName: string) => void}) {
+export default function Card({hospitalName, imgSrc, onChangeRating}:{hospitalName:string, imgSrc?:string, onChangeRating?:(newValue: number | null, hospitalName: string) => void}) {
     const [value, setValue] = React.useState<number | null>(5);
 
     const handleRatingChange = (event: React.ChangeEvent<{}>, newValue: number | null) => {
@@ -25,12 +25,15 @@ export default function Card({hospitalName, imgSrc, onChangeRating}:{hospitalNam
         <InteractiveCard>
             <div className={styles.card}>
                 <div className={styles.cardimg}>
+                   {
+                    imgSrc?
                     <Image src={imgSrc}
                         alt='Hospital Picture'
                         width={250} // Set the width of the image
                         height={250} // Set the height of the image
                         layout='responsive'
-                    />
+                    />: null
+                    }
                 </div>
                 <div className={styles.cardText}>{hospitalName}</div>
             

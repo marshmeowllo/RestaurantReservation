@@ -19,7 +19,7 @@ export default function booking() {
     const dispatch = useDispatch<AppDisptach>()
 
 
-    const [bookDate,setBookDate] = useState<Dayjs|null>(null)
+    const [bookDate,setBookDate] = useState<Date|null>(null)
     const [fName, setfName] = useState<string>('')
     const [lname, setlName] = useState<string>('')
     const [cid, setCid] = useState<string>('')
@@ -57,17 +57,7 @@ export default function booking() {
                 <label htmlFor="name" className="text-md text-left text-gray-600">Lastname</label>
                 <input type="text" id="name" name="Lastname" className="MuiInput-input" value={lname}
                 onChange={(e)=>{setlName(e.target.value)}}/>
-                <label htmlFor="id" className="text-md text-left text-gray-600">Citizen ID</label>
-                <input type="text" id="id" name="Citizen Id" placeholder="Your ID" className="MuiInput-input" value={cid}
-                onChange={(e)=>{setCid(e.target.value)}}/>
-                <label htmlFor="hospital" className="text-md text-left text-gray-600">Hospital</label>
-                <Select variant="standard" name="hospital" id="hospital" className="h-[2em] w-[200px]" value={hName}
-                onChange={(e)=> {sethName(e.target.value)}}>
-                    <MenuItem value="Chula">Chulalongkorn Hospital</MenuItem>
-                    <MenuItem value="Rajavithi">Rajavithi Hospital</MenuItem>
-                    <MenuItem value="Thammasat">Thammasat University Hospital</MenuItem>
-                </Select>
-                <DateReserve onDateChange={(value:Dayjs)=>{setBookDate(value)}}/>
+                <DateReserve onDateTimeChange={(value:Date)=>{setBookDate(value)}}/>
                 </div>
             </div>
             <button name="Book Vaccine" className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2

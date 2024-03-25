@@ -4,8 +4,8 @@ export default function SideBar() {
 
     const listItems = [
         { href: '/', label: 'Home' },
-        { href: '/', label: 'Eatery' },
-        { href: '/', label: 'Login' },
+        { href: '/restaurant', label: 'Eatery' },
+        { href: '/api/auth/signin', label: 'Login' },
     ];
 
     return (
