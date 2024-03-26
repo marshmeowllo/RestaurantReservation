@@ -30,7 +30,7 @@ const Login: NextPage = () => {
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center mt-300">
-   <p className='text-4xl mb-16 ml-7 text-left font-bold'>Login</p>
+      <p className='text-4xl mb-16 ml-7 text-left font-bold'>Login</p>
 
       <form onSubmit={handleFormSubmit} className="w-full max-w-xs">
         <div className="mb-4">
@@ -42,7 +42,9 @@ const Login: NextPage = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-1 text-base border border-black outline-none focus:border-indigo-500"
+            className="w-full px-3 py-1 text-base inline-block border p-2 text-left border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
+            hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 text-stone-800 hover:text-stone-100 transform 
+            hover:-translate-x-1 hover:-translate-y-1"
             required
           />
         </div>
@@ -55,13 +57,17 @@ const Login: NextPage = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-1 text-base border border-black outline-none focus:border-indigo-500"
+            className="w-full px-3 py-1 text-base inline-block border p-2 text-left border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
+            hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 text-stone-800 hover:text-stone-100 transform 
+            hover:-translate-x-1 hover:-translate-y-1"
             required
           />
         </div>
         <button
           type="submit"
-          className="w-full px-8 py-2 mt-4 text-black bg-white border-2 border-black hover:bg-black hover:text-white"
+          className="w-full px-8 py-2 mt-4 inline-block border p-2 text-center border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
+          hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
+          hover:-translate-x-1 hover:-translate-y-1"
         >
           Sign In
         </button>
