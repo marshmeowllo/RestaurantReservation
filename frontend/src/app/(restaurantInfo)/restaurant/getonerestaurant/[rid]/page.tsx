@@ -65,10 +65,17 @@ export default async function GetOne({ params }: { params: { rid: string } }) {
                 </div>
             </div>
             <div className="flex flex-row">
-                <button className="text-base w-[20%] mb-4 mr-4 inline-block border p-2 text-center
+                <Link href="/restaurant" className='w-[20%] mr-4 inline-block'>
+                    <button className="text-base w-[100%] mb-4 mr-4 inline-block border p-2 text-center
                     border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
                     hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
-                    hover:-translate-x-1 hover:-translate-y-1">Back</button>
+                    hover:-translate-x-1 hover:-translate-y-1"
+                    >
+                        Back
+                    </button>
+                </Link>
+
+
                 <button className="text-base w-[80%] mb-4 inline-block border p-2 text-center border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
                         hover:-translate-x-1 hover:-translate-y-1">Go Reserve</button>
