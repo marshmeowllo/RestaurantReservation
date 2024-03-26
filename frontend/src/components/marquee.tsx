@@ -23,7 +23,7 @@ const Marquee = () => {
       variants={marqueeVariants}
       animate="animate"
     >
-      <p className="pl-2 pr-2 pt-1 pb-1 text-stone-100">
+      <p className=" text-stone-100">
       Software Development Practice II: Project#5: Restaurant Reservation (I cut my hair)
       </p>
     </motion.div>
