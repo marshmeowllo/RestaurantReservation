@@ -20,6 +20,13 @@ const Register: NextPage = () => {
 
   const handleRegister = async()=>{
     const response = await userRegister(name,telephone,email,password,'user')
+    setName('')
+    setTelephone('')
+    setEmail('')
+    setConfirmEmail('')
+    setPassword('')
+    setConfirmPassword('')
+    alert('Register Successfully')
   }
 
   return (
@@ -27,7 +34,6 @@ const Register: NextPage = () => {
 
       <p className='text-4xl mb-16 ml-7 text-left font-bold'>Register</p>
 
-      <form onSubmit={handleFormSubmit} className="w-full max-w-lg space-y-4">
         <div className="flex justify-between gap-4">
           <div className="flex-1">
             <label htmlFor="name" className="block leading-7 text-sm text-gray-600">
@@ -130,13 +136,13 @@ const Register: NextPage = () => {
           type="submit"
           className="w-full px-8 py-2 mt-4 inline-block border p-2 text-center border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
           hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
-          hover:-translate-x-1 hover:-translate-y-1">
+          hover:-translate-x-1 hover:-translate-y-1" onClick={handleRegister}>
           Register
         </button>
         {error && (
           <p className="mt-3 text-xs text-center text-red-500">{error}</p>
         )}
-      </form>
+      
     </div>
   );
 };
