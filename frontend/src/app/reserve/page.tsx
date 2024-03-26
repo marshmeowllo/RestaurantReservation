@@ -1,6 +1,6 @@
 'use client'
 import DateReserve from "@/components/DateReserve";
-import {Select, MenuItem} from '@mui/material'
+import { Select, MenuItem } from '@mui/material'
 import getUserProfile from "@/libs/getUserProfile";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
@@ -13,6 +13,8 @@ import { AppDisptach } from "@/redux/store";
 import { addReservation } from "@/redux/features/resSlice";
 import { removeReservation } from "@/redux/features/resSlice";
 import { reserveItem } from "../../../interface";
+import { useEffect } from "react";
+import Image from "next/image";
 
 export default function booking() {
     const urlParams = useSearchParams()
@@ -20,16 +22,35 @@ export default function booking() {
     const name = urlParams.get('name')
 
     const dispatch = useDispatch<AppDisptach>()
+    const now = dayjs().format('DD/MM/YYYY');
+    const [currentTime, setCurrentTime] = useState(dayjs().format('HH:mm'));
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const newTime = dayjs().format('HH:mm');
+            setCurrentTime(newTime);
+
+            // Check if the minutes have changed
+            const currentMinutes = dayjs().minute();
+            if (currentMinutes === 0) {
+                // Perform your desired action when minutes change
+                console.log('Minutes changed');
+            }
+        }, 1000); // Update every second
+
+        // Clean up interval on component unmount
+        return () => clearInterval(intervalId);
+    }, []);
 
 
-    const [bookDate,setBookDate] = useState<Date|null>(null)
+    const [bookDate, setBookDate] = useState<Date | null>(null)
     const [fName, setfName] = useState<string>('')
     const [lname, setlName] = useState<string>('')
     const [cid, setCid] = useState<string>('')
-    const [hName, sethName] = useState<string|null>("Chula")
-    const makeBooking = ()=>{
-        if(cid && fName && lname && bookDate && hName){
-            const item:reserveItem = {
+    const [hName, sethName] = useState<string | null>("Chula")
+    const makeBooking = () => {
+        if (cid && fName && lname && bookDate && hName) {
+            const item: reserveItem = {
                 user: fName,
                 id: cid,
                 restaurant: hName,
@@ -49,23 +70,41 @@ export default function booking() {
     }
 
     return (
-        <main className="bg-slate-100 m-5 p-5">
-            
-            <div className='w-fit space-y-2'>
-                
-                <div className="bg-slate-100 rounded-lg space-x-5 space-y-2 w-fit px-10 py-5">
-                <label htmlFor="name" className="text-md text-left text-gray-600">Name</label>
-                <input type="text" id="name" name="Name" className="MuiInput-input" value={fName}
-                onChange={(e)=>{setfName(e.target.value)}}/>
-                <label htmlFor="name" className="text-md text-left text-gray-600">Lastname</label>
-                <input type="text" id="name" name="Lastname" className="MuiInput-input" value={lname}
-                onChange={(e)=>{setlName(e.target.value)}}/>
-                <DateReserve onDateTimeChange={(value:Date)=>{setBookDate(value)}}/>
+        <main className="flex flex-col w-[70%]">
+
+            <div className='flex flex-row mb-4'>
+                <div className='w-[50%] flex flex-col'>
+                    <div>
+                        <p className="text-4xl mb-16 font-bold">Reserve Table</p>
+                        <p className="text-2xl mb-6">{name}</p>
+                        <p className="text-2xl mb-6">Date</p>
+                        <p className="text-4xl mb-4 inline-block border border-stone-800 p-2">{now}</p>
+                    </div>
+                    <div className="flex flex-row">
+                        <div className="flex flex-col mr-9">
+                            <p className="text-2xl mb-6 text-left text-stone-800">Time</p>
+                            <p className="text-4xl mb-4 inline-block border border-stone-800 p-2">{currentTime}</p>
+                        </div>
+                        <div className="flex flex-col">
+                            <p className="text-2xl mb-6 text-left text-stone-800">Reserve by</p>
+                            <p className="text-4xl mb-6 inline-block border border-stone-800 p-2">{rid}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="w-[50%]">
+                    <Image src={"/image_1.png"} alt='' width={0} height={0}
+                        className='w-[100%] p-4' />
                 </div>
             </div>
-            <button name="Book Vaccine" className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2
-                shadow-sm text-white" onClick={makeBooking}>Book Vaccine</button>
-                
+            <div className="flex flex-row">
+                <button className="text-base w-[20%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
+                        hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
+                        hover:-translate-x-1 hover:-translate-y-1">Back</button>
+                <button className="text-base w-[80%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
+                        hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
+                        hover:-translate-x-1 hover:-translate-y-1">Reserve Now!</button>
+
+            </div>
         </main>
     );
 }
