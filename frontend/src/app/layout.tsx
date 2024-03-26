@@ -51,7 +51,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TopBar userName={session? profile.data.name: "whoami" } />
+        <TopBar userName={  profile.data.name } />
 
         <div className="flex flex-row">
           <ReduxProvider>
