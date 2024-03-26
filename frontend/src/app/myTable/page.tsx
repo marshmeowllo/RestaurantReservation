@@ -19,7 +19,7 @@ export default async function Home() {
         reserved.data.map((item: reserveItem) => (
           <div key={item.id}>
             <p>User: {item.user}</p>
-            <p>Restaurant: {item.restaurant}</p>
+            {/* <p>Restaurant: {item.restaurant}</p> */}
             <p>Reservation Date: {item.resvDate}</p>
             <p>Created At: {item.createdAt}</p>
           </div>
