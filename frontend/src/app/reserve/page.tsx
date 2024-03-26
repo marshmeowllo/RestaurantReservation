@@ -16,6 +16,7 @@ import { reserveItem } from "../../../interface";
 import postReservation from "@/libs/postReservation";
 import utcPlugin from 'dayjs/plugin/utc';
 import { useSession } from "next-auth/react";
+import Card from "@/components/Card";
 
 export default function booking() {
     const urlParams = useSearchParams()
