@@ -22,7 +22,7 @@ const Home: NextPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ml-6">
           <div>
             <Image
-              src="/Restauranthomepage.jpg" 
+              src="/Restauranthomepage.jpg"
               alt="Restaurant Image"
               width={600}
               height={400}
@@ -48,10 +48,13 @@ const Home: NextPage = () => {
           </div>
         </div>
         <div className="text-center mt-8">
-        <Link href="/login" className="mt-4 bg-white border-2 border-black text-black px-8 py-2 hover:bg-black hover:text-white">
-  Make a Reservation
-</Link>
-
+          <Link href="/login">
+          <button className="mt-4 inline-block border p-2 text-center border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
+                        hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
+                        hover:-translate-x-1 hover:-translate-y-1">
+            Make a Reservation
+          </button>
+          </Link>
         </div>
       </main>
     </>
