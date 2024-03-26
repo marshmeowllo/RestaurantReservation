@@ -13,26 +13,30 @@ import { AppDisptach } from "@/redux/store";
 import { addReservation } from "@/redux/features/resSlice";
 import { removeReservation } from "@/redux/features/resSlice";
 import { reserveItem } from "../../../interface";
+import postReservation from "@/libs/postReservation";
+import { useSession } from "next-auth/react";
+import utcPlugin from "dayjs/plugin/utc"
 
 export default function booking() {
     const urlParams = useSearchParams()
     const rid = urlParams.get('id')
-    const name = urlParams.get('name')
+    const rName = urlParams.get('name')
+    const {data:session} = useSession()
+    //console.log(session?.user.token)
 
     const dispatch = useDispatch<AppDisptach>()
 
-
-    const [bookDate,setBookDate] = useState<Date|null>(null)
+    const currentDate = new Date();
+    const [bookDate,setBookDate] = useState<Date>(currentDate)
     const [fName, setfName] = useState<string>('')
     const [lname, setlName] = useState<string>('')
     const [cid, setCid] = useState<string>('')
-    const [hName, sethName] = useState<string|null>("Chula")
-    const makeBooking = ()=>{
-        if(cid && fName && lname && bookDate && hName){
+    /*const makeBooking = ()=>{
+        if(cid && fName && lname && bookDate){
             const item:reserveItem = {
                 user: fName,
                 id: cid,
-                restaurant: hName,
+                restaurant: rid,
                 resvDate: dayjs(bookDate).format("YYYY/MM/DD"),
                 createdAt: Date.now.toString(),
             }
@@ -41,10 +45,17 @@ export default function booking() {
             setfName('');
             setlName('');
             setCid('');
-            sethName('');
             setBookDate(null);
             // Send alert
             alert('Booking successful!');
+        }
+    }*/
+    const makeBooking= async ()=>{
+        console.log(rid)
+        const utcTime = dayjs(bookDate).utc()
+        console.log(dayjs(bookDate).format("YYYY-MM-DD")+"T"+utcTime.format("HH:mm:ss")) //    "resvDate": "2024-12-24T22:50:00.000Z"
+        if(rid && session){
+            const response = await postReservation(rid,dayjs(bookDate).format("YYYY-MM-DD")+"T"+utcTime.format("HH:mm:ss"),session.user.token)
         }
     }
 
