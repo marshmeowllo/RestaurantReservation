@@ -71,7 +71,7 @@ export default function booking() {
                     <div>
                         <p className="text-4xl mb-16 font-bold">Reserve Table</p>
 
-                        <div >
+                        <div className="text-2xl mb-6">
                         Resturant Name
                         </div>
                         <p className="text-2xl mb-6">{session?.user.name}</p>

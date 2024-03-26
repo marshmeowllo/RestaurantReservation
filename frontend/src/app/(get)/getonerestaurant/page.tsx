@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function GetOne() {
     return (
-        <div className="w-[70%]">
+        <div className="w-[70%] pl-4">
             <h1 className="text-4xl	font-bold mb-16">Restaurant_Name</h1>
             <div className="flex flex-row mb-4">
                 <div className="w-[50%]">
@@ -27,9 +27,8 @@ export default function GetOne() {
 
                 </div>
                 <div className="w-[50%]">
-                    <Image src={"/image_1.png"} alt='' width={0} height={0}
-                    className='w-[100%]'/>
-                </div>
+    <img src="/image_1.png" alt="" className="w-full p-4" />
+</div>
             </div>
             <div className="flex flex-row">
                 <button className="text-base w-[20%] mb-4 mr-4 inline-block border p-2 text-center
