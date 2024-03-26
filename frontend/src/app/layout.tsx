@@ -21,17 +21,23 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nextAuthSession = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions)
   const restaurant = getRestaurants();
+
+  if (session) {
+    console.log("session:", session.user.name);
+  } else {
+    console.log("session: no session");
+  }
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TopBar userName="sam" />
+        <TopBar userName={session? session.user.name: "whoami" } />
 
         <div className="flex flex-row">
           <ReduxProvider>
-          <NextAuthProvider session={nextAuthSession}>
+          <NextAuthProvider session={session}>
             <LeftSideBar />
             {children}
             <RightSideBar RestaurantJson={restaurant} />

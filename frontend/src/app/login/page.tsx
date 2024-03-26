@@ -43,7 +43,7 @@ const Login: NextPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-3 py-1 text-base inline-block border p-2 text-left border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
-            hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 text-stone-800 hover:text-stone-100 transform 
+            hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 text-stone-800 transform 
             hover:-translate-x-1 hover:-translate-y-1"
             required
           />
@@ -58,7 +58,7 @@ const Login: NextPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-3 py-1 text-base inline-block border p-2 text-left border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
-            hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 text-stone-800 hover:text-stone-100 transform 
+            hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 text-stone-800 transform 
             hover:-translate-x-1 hover:-translate-y-1"
             required
           />
