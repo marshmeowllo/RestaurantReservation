@@ -30,11 +30,13 @@ export default async function RootLayout({
         <TopBar userName="sam" />
 
         <div className="flex flex-row">
+          <ReduxProvider>
           <NextAuthProvider session={nextAuthSession}>
             <LeftSideBar />
             {children}
             <RightSideBar RestaurantJson={restaurant} />
           </NextAuthProvider>
+          </ReduxProvider>
         </div>
       </body>
     </html>
