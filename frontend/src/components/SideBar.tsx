@@ -16,7 +16,7 @@ export async function LeftSideBar() {
     ];
     const postLogin = [
         { href: '/', label: 'Home' },
-        { href: '/reserve', label: 'Reserve' },
+        { href: '/restaurant', label: 'Reserve' },
         { href: '/myTable', label: 'My Table' },
         { href: '/api/auth/signout', label: "Logout" }
     ];

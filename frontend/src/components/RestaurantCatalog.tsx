@@ -11,7 +11,7 @@ export default async function RestaurantCatalog({ RestaurantsJson }: { Restauran
                     RestaurantReady.data ?
                         RestaurantReady.data.map((restaurantItem: RestaurantItem) =>
                             <Link href={`/restaurant/${restaurantItem.id}`} >
-                                <Card restaurantName={restaurantItem.name} imgSrc={"/image_1.png"} address={restaurantItem.address} tel={restaurantItem.tel} time={restaurantItem.opentime + " - " +restaurantItem.closetime} />
+                                <Card restaurantName={restaurantItem.name} imgSrc={"/image_1.png"} address={restaurantItem.address} tel={restaurantItem.tel} time={restaurantItem.opentime + " - " +restaurantItem.closetime} rid={restaurantItem.id} />
                             </Link>
                         ) : null
                 }
