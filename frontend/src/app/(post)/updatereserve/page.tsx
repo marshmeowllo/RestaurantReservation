@@ -3,7 +3,7 @@ import DateReserve from "@/components/DateReserve";
 import { Select, MenuItem } from '@mui/material'
 import getUserProfile from "@/libs/getUserProfile";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import dayjs, { Dayjs } from "dayjs";
@@ -12,11 +12,11 @@ import { useDispatch } from "react-redux";
 import { AppDisptach } from "@/redux/store";
 import { addReservation } from "@/redux/features/resSlice";
 import { removeReservation } from "@/redux/features/resSlice";
-import { reserveItem } from "../../../interface";
+import { reserveItem } from "../../../../interface";
 import { useEffect } from "react";
 import Image from "next/image";
 
-export default function booking() {
+export default function Update() {
     const urlParams = useSearchParams()
     const rid = urlParams.get('id')
     const name = urlParams.get('name')
@@ -75,10 +75,13 @@ export default function booking() {
             <div className='flex flex-row mb-4'>
                 <div className='w-[50%] flex flex-col'>
                     <div>
-                        <p className="text-4xl mb-16 font-bold">Reserve Table</p>
-                        <p className="text-2xl mb-6">{name}</p>
+                        <p className="text-4xl mb-16 font-bold">Update Reservation</p>
+                        <p className="text-2xl mb-6">Restaurant</p>
+                        <p className="text-4xl mb-4 inline-block border border-stone-800 p-2">{name}</p> 
+                        {/*restaurant name*/}
                         <p className="text-2xl mb-6">Date</p>
-                        <p className="text-4xl mb-4 inline-block border border-stone-800 p-2">{now}</p>
+                        <p className="text-4xl mb-4 inline-block border border-stone-800 p-2">{now}</p> 
+                        {/*restaurant reserve date*/}
                     </div>
                     <div className="flex flex-row">
                         <div className="flex flex-col mr-9">
@@ -96,13 +99,40 @@ export default function booking() {
                         className='w-[100%] p-4' />
                 </div>
             </div>
+            <div className="flex flex-col">
+                <p className="text-4xl mb-16 font-bold">Payment</p>
+                <div className="flex flex-row">
+                    <div className="flex flex-col mr-9">
+                        <p className="text-2xl mb-6 text-left text-stone-800">Date</p>
+                        <p className="text-4xl mb-4 inline-block border border-stone-800 p-2">{now}</p>
+                    </div>
+                    <div className="flex flex-col">
+                        <p className="text-2xl mb-6 text-left text-stone-800">Time</p>
+                        <p className="text-4xl mb-6 inline-block border border-stone-800 p-2">{currentTime}</p>
+                    </div>
+                </div>
+                <div className="flex flex-row">
+                    {/*may be: justify-between*/}
+                    <div className="flex flex-col mr-9">
+                        <p className="text-2xl mb-6 text-left text-stone-800">Payment Methods</p>
+                        <p className="text-4xl mb-4 inline-block border border-stone-800 p-2">credit</p>
+                    </div>
+                    <div className="flex flex-col">
+                        <p className="text-2xl mb-6 text-left text-stone-800">Total</p>
+                        <p className="text-4xl mb-6 inline-block border border-stone-800 p-2">THB: 5,000.00</p>
+                    </div>
+                </div>
+            </div>
             <div className="flex flex-row">
                 <button className="text-base w-[20%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
                         hover:-translate-x-1 hover:-translate-y-1">Back</button>
-                <button className="text-base w-[80%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
+                <button className="text-base w-[60%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
-                        hover:-translate-x-1 hover:-translate-y-1">Reserve Now!</button>
+                        hover:-translate-x-1 hover:-translate-y-1">Update Now!</button>
+                <button className="text-base w-[20%] mb-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
+                        hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
+                        hover:-translate-x-1 hover:-translate-y-1">Delete</button>
 
             </div>
         </main>
