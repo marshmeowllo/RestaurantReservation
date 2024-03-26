@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function payment() {
     return (
-        <div className="w-[70%]">
+        <div className="w-[70%] pl-4 pr-4">
             <h1 className="text-4xl	font-bold mb-16">Checkout</h1>
             <div className="flex flex-row mb-4">
                 <div className="w-[50%]">
@@ -38,9 +38,11 @@ export default function payment() {
             <button className="text-base w-[20%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
                         hover:-translate-x-1 hover:-translate-y-1">Back</button>
+                        
             <button className="text-base w-[60%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
                         hover:-translate-x-1 hover:-translate-y-1">Pay It!</button>
+                        
             <button className="text-base w-[20%] mb-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
                         hover:-translate-x-1 hover:-translate-y-1">Cancel</button>
