@@ -15,6 +15,9 @@ import { removeReservation } from "@/redux/features/resSlice";
 import { reserveItem } from "../../../interface";
 
 export default function booking() {
+    const urlParams = useSearchParams()
+    const rid = urlParams.get('id')
+    const name = urlParams.get('name')
 
     const dispatch = useDispatch<AppDisptach>()
 
