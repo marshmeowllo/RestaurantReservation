@@ -9,6 +9,7 @@ export interface RestaurantItem {
     tel: string,
     opentime: string,
     closetime: string,
+    imageUrl: string,
     map: string,
     __v: number,
     id: string

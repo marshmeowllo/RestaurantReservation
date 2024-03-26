@@ -10,7 +10,7 @@ export default async function RestaurantDetailPage({ params }: { params: { rid: 
         <main className="text-center p-5">
             <h1 className="text-lg font-medium">{restaurantDetails.data.name}</h1>
             <div className="flex flex-row my-5">
-                <Image src={"/image_1.png"}
+                <Image src={""}
                     alt="Restaurant Picture"
                     width={0} height={0} sizes="100vw"
                     className="rounded-lg w-[30%] bg-black" />
