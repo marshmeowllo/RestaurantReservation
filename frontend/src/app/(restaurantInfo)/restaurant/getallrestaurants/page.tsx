@@ -21,7 +21,8 @@ export default async function RestaurantDetailPage({ params }: { params: { rid: 
                     <div>Zipcode: {restaurantDetails.data.postalcode}</div>
                     <div>Tel: {restaurantDetails.data.tel}</div>
                 </div>
-                <Link href={`/reserve?id=${params.rid}&name=${restaurantDetails.data.name}`}>
+                {}
+                <Link href={`/reserve/?id=${params.rid}&name=${restaurantDetails.data.name}`}>
                     <button className="block rounded-md bg-sky-600 hover:bg-indigo px-3 py-1 text-white shadow-sm">
                         Create Reservation
                     </button>
