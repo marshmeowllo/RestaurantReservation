@@ -7,7 +7,7 @@ export default function Home() {
   const restaurants = getRestaurants()
   return (
     <main className='w-[70%] text-center'>
-        <p className='text-4xl mb-16 text-left'>Your Reservation</p>
+        <p className='text-4xl mb-16 ml-7 text-left font-bold'>Your Reservation</p>
       <Suspense fallback={<p>Now Loading...<LinearProgress /></p>}>
         <RestaurantCatalog RestaurantsJson={restaurants} />
       </Suspense>

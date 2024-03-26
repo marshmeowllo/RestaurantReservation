@@ -18,8 +18,9 @@ const Register: NextPage = () => {
   };
 
   return (
-    <div className="container mx-auto flex flex-col items-center justify-center min-h-screen py-2 mt-300">
-    {/* <div className="container mx-auto flex flex-col items-center justify-center mt-100"> */}
+    <div className="container mx-auto flex flex-col items-center justify-center mt-300">
+   
+   <p className='text-4xl mb-16 ml-7 text-left font-bold'>Register</p>
 
       <form onSubmit={handleFormSubmit} className="w-full max-w-lg space-y-4">
         <div className="flex justify-between gap-4">

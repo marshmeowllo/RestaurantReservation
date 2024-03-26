@@ -29,7 +29,9 @@ const Login: NextPage = () => {
   };
 
   return (
-    <div className="container mx-auto flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="container mx-auto flex flex-col items-center justify-center mt-300">
+   <p className='text-4xl mb-16 ml-7 text-left font-bold'>Login</p>
+
       <form onSubmit={handleFormSubmit} className="w-full max-w-xs">
         <div className="mb-4">
           <label htmlFor="email" className="leading-7 text-sm text-gray-600">
@@ -59,7 +61,7 @@ const Login: NextPage = () => {
         </div>
         <button
           type="submit"
-          className="mt-4 bg-white border-2 border-black text-black px-8 py-2 hover:bg-black hover:text-white"
+          className="w-full px-8 py-2 mt-4 text-black bg-white border-2 border-black hover:bg-black hover:text-white"
         >
           Sign In
         </button>
