@@ -24,6 +24,12 @@ export interface RestaurantItem {
     createdAt: string;
   }
 
+  export interface reserveJson {
+    success: boolean,
+    count: number,
+    data: reserveItem[]
+  }
+
   export interface RestaurantJson {
     success: boolean,
     count: number,

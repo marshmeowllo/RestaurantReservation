@@ -9,7 +9,11 @@ import Link from 'next/link';
 
 export default function Card({ restaurantName, imgSrc, address, tel, time, rid }:
     { restaurantName: string, imgSrc: string, address: string, tel: string, time: string, rid:string }) {
-    return (
+    if (imgSrc === null) {
+        imgSrc = '/image_1.png';
+    }
+    console.log("here "+imgSrc);
+        return (
         <InteractiveCard>
             <div className='flex flex-col'>
                 <div className="w-[298px] h-[496px]">

@@ -24,6 +24,7 @@ export default function booking() {
     const rid = urlParams.get('id')
     const rName = urlParams.get('name')
     const { data: session } = useSession()
+    
     //console.log(session?.user.token)
 
     const dispatch = useDispatch<AppDisptach>()
@@ -72,7 +73,7 @@ export default function booking() {
                         <p className="text-4xl mb-16 font-bold">Reserve Table</p>
 
                         <div className="text-2xl mb-6">
-                            Resturant Name
+                            {rName}
                         </div>
                         <p className="text-2xl mb-6">{session?.user.name}</p>
                         <p className="text-2xl mb-6">Date</p>
