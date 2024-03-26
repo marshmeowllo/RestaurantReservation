@@ -2,6 +2,7 @@
 "use client";
 import { useState } from 'react';
 import type { NextPage } from 'next';
+import userRegister from '@/libs/userRegister';
 
 const Register: NextPage = () => {
   const [name, setName] = useState('');
@@ -16,6 +17,10 @@ const Register: NextPage = () => {
     e.preventDefault();
     // Your registration logic here
   };
+
+  const handleRegister = async()=>{
+    const response = await userRegister(name,telephone,email,password,'user')
+  }
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center mt-300">

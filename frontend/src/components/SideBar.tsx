@@ -46,7 +46,7 @@ export async function LeftSideBar() {
                                 </Link>
                             </li>
                         ))
-                }
+                        }
             </ul>
         </div>
     );
