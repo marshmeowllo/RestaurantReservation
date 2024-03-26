@@ -8,6 +8,7 @@ import { authOptions } from './api/auth/[...nextauth]/route'
 import NextAuthProvider from '@/providers/NextAuthProvider'
 import ReduxProvider from '@/redux/ReduxProvider'
 import getRestaurants from "@/libs/getRestaurants";
+import getUserProfile from "@/libs/getUserProfile";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,16 +25,33 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions)
   const restaurant = getRestaurants();
 
-  if (session) {
-    console.log("session:", session.user.name);
-  } else {
+  if (!session || !session.user.token) {
     console.log("session: no session");
-  }
+    return (
+      <html lang="en">
+      <body className={inter.className}>
+        <TopBar userName={ "whoami" } />
 
+        <div className="flex flex-row">
+          <ReduxProvider>
+          <NextAuthProvider session={session}>
+            <LeftSideBar />
+            {children}
+            <RightSideBar RestaurantJson={restaurant} />
+          </NextAuthProvider>
+          </ReduxProvider>
+        </div>
+      </body>
+    </html>
+    )
+  }
+    console.log("session:", session.user.token);
+  
+    const profile = await getUserProfile(session.user.token)
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TopBar userName={session? session.user.name: "whoami" } />
+        <TopBar userName={session? profile.data.name: "whoami" } />
 
         <div className="flex flex-row">
           <ReduxProvider>
