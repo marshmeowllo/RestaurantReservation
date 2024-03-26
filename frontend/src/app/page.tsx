@@ -31,7 +31,7 @@ const Home: NextPage = () => {
           </div>
           <div>
             <h2 className="text-2xl font-bold mb-4">About Us</h2>
-            <p className="text-gray-700">
+            <p className="text-stone-800 indent-8 whitespace-normal hyphens-manual break-all">
               The restaurant reservation website welcomes visitors with an
               inviting atmosphere and an intuitive interface designed to
               streamline the booking process. Offering a tantalizing glimpse into
