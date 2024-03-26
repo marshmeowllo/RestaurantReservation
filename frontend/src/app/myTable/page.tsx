@@ -85,6 +85,19 @@ export default async function Home() {
           }
         </div>
       </Suspense>
+      <p className='text-4xl mb-16 ml-7 text-left font-bold'>Your Reservations</p>
+      {reserved.data.length > 0 ? (
+        reserved.data.map((item: reserveItem) => (
+          <div key={item.id}>
+            <p>User: {item.user}</p>
+            {/* <p>Restaurant: {item.restaurant}</p> */}
+            <p>Reservation Date: {item.resvDate}</p>
+            <p>Created At: {item.createdAt}</p>
+          </div>
+        ))
+      ) : (
+        <p>No reservations found.</p>
+      )}
     </main>
   );
 }
