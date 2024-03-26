@@ -1,0 +1,25 @@
+@startuml Payment (Delete)
+
+header Delete Payment Sequence Diagram
+footer Page 5 of 5
+title "Payment (Delete)"
+
+participant "Client" as client
+participant "<<javaScript>>\n:server" as server
+participant "<<javaScript>>\n:Reservation" as reservationsRouter
+participant "<<router>>\n:payments" as routerPayments
+participant "<<controllers>>\n:payments" as controllersPayments
+participant "<<model>>\n:payment" as modelPayments
+database "<<MongoDB>>\n:payments" as PaymentDatabase
+
+client->server: req.delete('/payments/:id')
+server->reservationsRouter ++:app.use('/api/v1/reservations', Reservation)
+reservationsRouter -> routerPayments ++:router.use(paymentRouter)
+routerPayments->controllersPayments: deletePayment()
+controllersPayments->modelPayments: findByIdAndDelete(req.params.id)
+modelPayments->PaymentDatabase: PaymentSchema
+PaymentDatabase --> modelPayments --: Payment
+controllersPayments <-- modelPayments --:Payment
+controllersPayments->client --:response
+
+@enduml

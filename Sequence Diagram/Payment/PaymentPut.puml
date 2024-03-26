@@ -1,0 +1,23 @@
+@startuml Restautants (PUT)
+
+header PUT Payment Sequence Diagram
+footer Page 4 of 5
+title "Payment (PUT)"
+
+participant "Client" as client
+participant "<<JavaScript>>\n:Server" as server
+participant "<<Router>>\n:Payments" as routerPayments
+participant "<<Controllers>>\n:Payments" as controllersPayments
+participant "<<Model>>\n:Payment" as modelPayments
+database "<<MongoDB>>\n:Payments" as PaymentDatabase
+
+client->server: req.put('/Payments/:id')
+server->routerPayments: app.use('/api/v1/Payments/:id', Payment);
+routerPayments->controllersPayments: updatePayment()
+controllersPayments->modelPayments: findByIdAndUpdate(req.params.id, req.body)
+modelPayments->PaymentDatabase: PaymentSchema
+PaymentDatabase-->modelPayments: Payment
+controllersPayments<--modelPayments: Payment
+controllersPayments->client: response
+
+@enduml

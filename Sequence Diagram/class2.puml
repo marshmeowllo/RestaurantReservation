@@ -1,0 +1,155 @@
+@startuml
+
+class models.Restaurant{
+name: string(50), not NULL, UNIQUE
+address: string, not NULL
+district: string, not NULL
+province: string, not NULL
+postalcode: string(5), not NULL
+region: string, not NULL
+tel: string
+opentime: string(5), not NULL
+closetime: string(5), not NULL
+map: url, not NULL
+--
+.pre('deleteOne')
+}
+class models.Payment{
+timePayment: Date
+reservation: ObjectId, not NULL
+amount: number, not NULL
+paymentMethods: String, not NULL
+}
+class models.Reservation{
+user: ObjectId
+restaurant: ObjectId
+createdAt: Date
+}
+class models.User{
+name: String
+tel: String, not NULL, UNIQUE
+email: String, not NULL, UNIQUE
+role: String
+password: String, not NULL
+resetPasswordToken: String
+resetPasswordExpire: Date
+createdAt: Date
+--
+.pre('save')
+getSignedJwtToken()
+matchPassword(enteredPassword)
+}
+class routes.restaurants{
+reservationRouter
+--
+('/:id/reservations).use(reservationRouter)
+('/').get(protect,authorize('admin','user'),getRestaurants)
+('/').post(protect,authorize('admin'),createRestaurant)
+('/:id').get(protect,authorize('admin','user'),getRestaurant)
+('/:id').put(protect,authorize('admin'),updateRestaurant)
+('/:id').delete(protect,authorize('admin'),deleteRestaurant)
+}
+class routes.reservations{
+paymentsRouter
+--
+('/:id/payments).use(paymentsRouter)
+('/').get(protect,authorize('admin','user'),getReservations)
+('/').post(protect,authorize('admin','user'),createReservation)
+('/:id').get(protect,authorize('admin','user'),getReservation)
+('/:id').put(protect,authorize('admin'),updateReservation)
+('/:id').delete(protect,authorize('admin'),deleteReservation)
+}
+class routes.payments{
+('/').get(protect,authorize('admin','user'),getPayments)
+('/').post(protect,authorize('admin'),createPayment)
+('/:id').get(protect,authorize('admin','user'),getPayment)
+('/:id').put(protect,authorize('admin'),updatePayment)
+('/:id').delete(protect,authorize('admin'),deletePayment)
+}
+class routes.auth{
+('/register').post(register)
+('/login').post(login)
+('/me').get(protect,getMe)
+('logout').get(logout)
+}
+class controllers.restaurants{
+    --
+exports.getRestaurants
+exports.getRestaurant
+exports.createRestaurant
+exports.updateRestaurant
+exports.deleteRestaurant
+}
+class controllers.reservations{
+    --
+exports.getReservations
+exports.getReservation
+exports.createReservation
+exports.updateReservation
+exports.deleteReservation
+}
+class controllers.auth{
+    --
+exports.register
+exports.login
+exports.sendTokenResponse
+exports.getMe
+exports.logout
+}
+class controllers.payments{
+    --
+exports.getPayments
+exports.getPayment
+exports.createPayment
+exports.updatePayment
+exports.deletePayment
+}
+class middleware.auth{
+    --
+exports.protect
+exports.authorize
+}
+class server{
+
+}
+class config.config{
+PORT
+NODE_ENV
+MONGO_URI
+JWT_SECRET
+JWT_EXPIRE
+JWT_COOKIE_EXPIRE
+}
+class config.db{
+ConnectDB
+    --
+module.exports = ConnectDB
+}
+
+config.db -- models.Restaurant
+models.Restaurant -- models.Reservation
+models.Reservation -- models.User
+models.Reservation -- models.Payment
+server --* routes.auth
+server --* routes.payments
+server --* routes.reservations
+server --* routes.restaurants
+routes.restaurants --* routes.reservations
+routes.reservations --* routes.payments
+
+routes.auth -- controllers.auth
+routes.payments -- controllers.payments
+routes.reservations -- controllers.reservations
+routes.restaurants -- controllers.restaurants
+
+middleware.auth -- routes
+
+controllers.auth --* models.User
+controllers.payments --* models.Payment
+controllers.reservations --* models.Reservation
+controllers.restaurants --* models.Restaurant
+
+config.config --* config.db
+config.config --* server
+config.config --* middleware
+@enduml

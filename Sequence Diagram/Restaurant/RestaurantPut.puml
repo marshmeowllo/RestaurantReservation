@@ -1,0 +1,23 @@
+@startuml Restautants (PUT)
+
+header PUT Restaurant Sequence Diagram
+footer Page 4 of 5
+title "Restaurant (PUT)"
+
+participant "Client" as client
+participant "<<JavaScript>>\n:Server" as server
+participant "<<Router>>\n:Restaurants" as routerRestaurants
+participant "<<Controllers>>\n:Restaurants" as controllersRestaurants
+participant "<<Model>>\n:Restaurant" as modelRestaurants
+database "<<MongoDB>>\n:Restaurants" as RestaurantDatabase
+
+client->server: req.put('/restaurants/:id')
+server->routerRestaurants: app.use('/api/v1/restaurants', restaurant);
+routerRestaurants->controllersRestaurants: updateRestaurant()
+controllersRestaurants->modelRestaurants: findByIdAndUpdate(req.params.id, req.body)
+modelRestaurants->RestaurantDatabase: RestaurantSchema
+RestaurantDatabase-->modelRestaurants: Restaurant
+controllersRestaurants<--modelRestaurants: Restaurant
+controllersRestaurants->client: response
+
+@enduml
