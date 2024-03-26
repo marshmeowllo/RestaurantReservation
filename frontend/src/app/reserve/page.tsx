@@ -16,6 +16,7 @@ import { reserveItem } from "../../../interface";
 import postReservation from "@/libs/postReservation";
 import utcPlugin from 'dayjs/plugin/utc';
 import { useSession } from "next-auth/react";
+import Card from "@/components/Card";
 import Image from "next/image";
 
 export default function booking() {
@@ -62,12 +63,17 @@ export default function booking() {
     }
 
     return (
-        <main className="flex flex-col w-[70%]">
+        <main className="flex flex-col w-[70%] pl-4"> 
 
             <div className='flex flex-row mb-4'>
                 <div className='w-[50%] flex flex-col'>
+                  
                     <div>
                         <p className="text-4xl mb-16 font-bold">Reserve Table</p>
+
+                        <div className="text-2xl mb-6">
+                        Resturant Name
+                        </div>
                         <p className="text-2xl mb-6">{session?.user.name}</p>
                         <p className="text-2xl mb-6">Date</p>
                         <p className="text-4xl mb-4 inline-block border border-stone-800 p-2">{now}</p>
@@ -83,10 +89,10 @@ export default function booking() {
                         </div>
                     </div>
                 </div>
-                <div className="w-[50%]">
-                    <Image src={"/image_1.png"} alt='' width={0} height={0}
-                        className='w-[100%] p-4' />
-                </div>
+              <div className="w-[50%]">
+    <img src="/image_1.png" alt="" className="w-full p-4" />
+</div>
+
             </div>
             <div className="flex flex-row">
                 <button className="text-base w-[20%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center relative overflow-hidden transition-transform duration-300 ease-in-out 

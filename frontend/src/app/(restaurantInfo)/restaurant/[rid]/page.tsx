@@ -1,6 +1,7 @@
 import Image from "next/image"
 import getRestaurant from "@/libs/getRestaurant"
 import { Link } from "@mui/material";
+import Card from "@/components/Card";
 
 export default async function RestaurantDetailPage({ params }: { params: { rid: string } }) {
 

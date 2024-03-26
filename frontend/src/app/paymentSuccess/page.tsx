@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-export default function PaymentSuccess({ amount, dateTime }) {
+export default function PaymentSuccess({ amount, dateTime }: { amount: string, dateTime: string }) {
   return (
     <div className="container mx-auto flex flex-col items-center justify-center mt-300">
       <img
