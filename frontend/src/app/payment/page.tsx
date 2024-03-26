@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function payment() {
     return (
         <div className="w-[70%]">
@@ -33,10 +35,12 @@ export default function payment() {
                 </div>
             </div>
             <div className="flex flex-row">
-            <p className="text-base w-[20%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center">Back</p>
-            <p className="text-base w-[60%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center">Pay It!</p>
-            <p className="text-base w-[20%] mb-4 inline-block border border-stone-800 p-2 text-center">Cancel</p>
-            </div>
+  <button className="text-base w-[20%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center hover:bg-black hover:text-white">Back</button>
+  
+
+  <button className="text-base w-[60%] mb-4 mr-4 inline-block border border-stone-800 p-2 text-center hover:bg-black hover:text-white">Pay It!</button>
+  <button className="text-base w-[20%] mb-4 inline-block border border-stone-800 p-2 text-center hover:bg-black hover:text-white">Cancel</button>
+</div>
         </div>
     );
 }
