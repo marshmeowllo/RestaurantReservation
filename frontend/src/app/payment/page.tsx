@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function payment() {
     return (
         <div className="w-[70%]">
@@ -43,6 +45,7 @@ export default function payment() {
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
                         hover:-translate-x-1 hover:-translate-y-1">Cancel</button>
             </div>
+
         </div>
     );
 }
