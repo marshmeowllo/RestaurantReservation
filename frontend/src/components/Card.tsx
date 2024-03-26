@@ -4,9 +4,11 @@ import styles from '@/components/card.module.css'
 import Image from 'next/image';
 import InteractiveCard from './InteractiveCard';
 import * as React from 'react';
+import { useRouter } from 'next/router';
 
-export default function Card({ restaurantName, imgSrc, address, tel, time }:
-    { restaurantName: string, imgSrc: string, address: string, tel: string, time: string }) {
+export default function Card({ restaurantName, imgSrc, address, tel, time, rid }:
+    { restaurantName: string, imgSrc: string, address: string, tel: string, time: string, rid:string }) {
+        const router = useRouter()
     return (
         <InteractiveCard>
             <div className='flex flex-col'>
@@ -43,12 +45,12 @@ export default function Card({ restaurantName, imgSrc, address, tel, time }:
                     <div className='flex flex-row m-2'>
                         <button className='w-[141px] h-[37px] border border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
-                        hover:-translate-x-1 hover:-translate-y-1' onClick={(e) => { e.stopPropagation; }}>
+                        hover:-translate-x-1 hover:-translate-y-1' onClick={(e) => { e.stopPropagation; router.push(`/restaurant/${rid}`)}}>
                             Details
                         </button>
                         <button className='w-[141px] h-[37px] border border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
                         hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 hover:bg-stone-800 text-stone-800 hover:text-stone-100 transform 
-                        hover:-translate-x-1 hover:-translate-y-1' onClick={(e) => { e.stopPropagation; }}>
+                        hover:-translate-x-1 hover:-translate-y-1' onClick={(e) => { e.stopPropagation; router.push(`/reserve?id=${rid}&name=${restaurantName}`)}}>
                             Reserve 
                         </button>
                     </div>
