@@ -18,6 +18,7 @@ export default async function GetOne({ params }: { params: { rid: string } }) {
     // Compare current time with open and close times
     const flag = currentTime >= openTime && currentTime <= closeTime;
 
+    const mapHref = restaurantDetails.data.map ? restaurantDetails.data.map : '/';
 
     return (
         <div className="w-[70%] pl-4">
@@ -44,7 +45,7 @@ export default async function GetOne({ params }: { params: { rid: string } }) {
                     </div>
                     <div>
                         <p className="text-2xl mb-4	">Address</p>
-                        <Link href={restaurantDetails.data.map}
+                        <Link href={mapHref}
                             className="block border p-2 text-center
                             border-stone-800 relative overflow-hidden transition-transform duration-300 ease-in-out 
                             hover:shadow-lg hover:shadow-stone-500/100 bg-stone-100 text-stone-800 transform 
